@@ -1,0 +1,32 @@
+version: "2.0"
+
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: guillermo
+      MYSQL_ROOT_PASSWORD: criptovoto123
+      WORDPRESS_DB_PASSWORD: criptovoto123
+      WORDPRESS_DB_NAME: voto
+    volumes:
+      - ./wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0.13
+    restart: always
+    environment:
+      MYSQL_DATABASE: voto
+      MYSQL_USER: guillermo
+      MYSQL_PASSWORD: criptovoto123
+      MYSQL_ROOT_PASSWORD: toor
+#      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
